@@ -1,0 +1,9 @@
+para rodar:
+python3 aco_resolve_path.py 10 100 map1.txt 0.5 100 -d
+sendo python aco_resolve_path.py <number_of_ants> <number_of_iterations> <map_file> <evaporation_factor> <pheromone_constant> -d
+
+no mapa: 
+'O' represents obstacles.
+'E' represents empty spaces.
+'S' represents the start point.
+'F' represents the finish point.
