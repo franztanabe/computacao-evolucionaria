@@ -126,5 +126,5 @@ class AntColony:
             self.pheromone_update()
             self.best_result = self.paths[0]
             self.empty_paths()
-            print(f'Iteration: {i}, length of the path: {len(self.best_result)}')
+            #print(f'Iteration: {i}, length of the path: {len(self.best_result)}')
         return self.best_result

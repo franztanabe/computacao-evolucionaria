@@ -10,10 +10,9 @@ class Map:
     class Nodes:
         ''' Class for representing the nodes
             used by the ACO algorithm '''
-        def __init__(self, row, col, in_map, spec):
+        def __init__(self, row, col, in_map):
             self.node_pos = (row, col)
             self.edges = self.compute_edges(in_map)
-            self.spec = spec
 
         def compute_edges(self, map_arr):
             ''' Class that returns the edges
@@ -34,16 +33,22 @@ class Map:
                                               'Pheromone': 1.0, 'Probability': 0.0})
             return edges
 
-    def __init__(self, map_name):
-        self.in_map = self._read_map(map_name)
-        self.occupancy_map = self._map_2_occupancy_map()
-        self.initial_node = (int(np.where(self.in_map == 'S')[0]), int(np.where(self.in_map == 'S')[1]))
-        self.final_node = (int(np.where(self.in_map == 'F')[0]), int(np.where(self.in_map == 'F')[1]))
+    # def __init__(self, map_name):
+    #     self.in_map = self._read_map(map_name)
+    #     self.occupancy_map = self._map_2_occupancy_map()
+    #     self.initial_node = (int(np.where(self.in_map == 'S')[0]), int(np.where(self.in_map == 'S')[1]))
+    #     self.final_node = (int(np.where(self.in_map == 'F')[0]), int(np.where(self.in_map == 'F')[1]))
+    #     self.nodes_array = self._create_nodes()
+    
+    def __init__(self, occupancy_map, initial_node, final_node):
+        self.occupancy_map = occupancy_map
+        self.initial_node = initial_node
+        self.final_node =  final_node
         self.nodes_array = self._create_nodes()
 
     def _create_nodes(self):
         ''' Create nodes out of the initial map '''
-        return [[self.Nodes(i, j, self.occupancy_map, self.in_map[i][j]) for j in range(self.in_map.shape[1])] for i in range(self.in_map.shape[0])]
+        return [[self.Nodes(i, j, self.occupancy_map) for j in range(self.occupancy_map.shape[1])] for i in range(self.occupancy_map.shape[0])]
 
     def _read_map(self, map_name):
         ''' Reads data from an input map txt file'''
